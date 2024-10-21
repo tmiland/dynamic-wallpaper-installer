@@ -86,16 +86,15 @@ install() {
   then
     mkdir -p "$bg_folder"
   fi
+  echo ""
+  read -n1 -r -p "Dynamic background installer is ready to be installed, press any key to continue..."
+  echo ""
   if [[ $(command -v 'git') ]]; then
     git clone https://github.com/tmiland/Dynamic-Wallpaper-Installer.git "$HOME"/.dwi
   else
     echo -e "${RED}${ERROR} This script requires git.\nProcess aborted${NC}"
     exit 0
   fi
-  echo ""
-  read -n1 -r -p "Dynamic background installer is ready to be installed, press any key to continue..."
-  echo ""
-  download_files
   ln -sfn "$HOME"/.dwi/dwi.sh "$HOME"/.local/bin/dwi
   chmod +x "$HOME"/.dwi/dwi.sh
   chmod +x "$HOME"/.dwi/dwi_config.sh
