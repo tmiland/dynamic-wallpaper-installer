@@ -90,7 +90,7 @@ install() {
   read -n1 -r -p "Dynamic background installer is ready to be installed, press any key to continue..."
   echo ""
   if [[ $(command -v 'git') ]]; then
-    git clone https://github.com/tmiland/Dynamic-Wallpaper-Installer.git "$HOME"/.dwi
+    git clone https://github.com/tmiland/Dynamic-Wallpaper-Installer.git "$HOME"/.dwi >/dev/null 2>&1
   else
     echo -e "${RED}${ERROR} This script requires git.\nProcess aborted${NC}"
     exit 0
@@ -100,6 +100,7 @@ install() {
     mkdir -p "$HOME"/.local/bin
   fi
   sudo ln -sfn "$HOME"/.dwi/dwi.sh "$HOME"/.local/bin/dwi
+  chown -R "$USER":"$USER" "$HOME"/.local/bin/dwi
   chmod +x "$HOME"/.dwi/dwi.sh
   chmod +x "$HOME"/.dwi/dwi_config.sh
   "$HOME"/.local/bin/dwi -c
