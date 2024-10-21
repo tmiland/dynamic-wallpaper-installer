@@ -103,7 +103,7 @@ install() {
   chmod +x "$HOME"/.dwi/dwi.sh
   chmod +x "$HOME"/.dwi/dwi_config.sh
   "$HOME"/.local/bin/dwi -c
-  tee <<EOF >> "$gbp_folder"/"$wp_name".xml
+  tee <<EOF > "$gbp_folder"/"$wp_name".xml
 <?xml version="1.0"?>
 <!DOCTYPE wallpapers SYSTEM "gnome-wp-list.dtd">
 <wallpapers>
@@ -115,7 +115,7 @@ install() {
 </wallpaper>
 </wallpapers>
 EOF
-  cp -rp "$HOME"/.dwi/assets/debian "$bg_folder"/
+  cp -rp "$HOME"/.dwi/assets/debian/* "$bg_folder"/
   exit 0
 }
 
