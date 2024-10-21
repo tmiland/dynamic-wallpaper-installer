@@ -86,25 +86,12 @@ install() {
   then
     mkdir -p "$bg_folder"
   fi
-
-  url=https://github.com/tmiland/Dynamic-Wallpaper-Installer/raw/refs/heads/main
-  dwi_config_url=$url/dwi_config
-  dwi_config_sh_url=$url/dwi_config.sh
-  dwi_url=$url/dwi.sh
-  download_files() {
-    if [[ $(command -v 'curl') ]]; then
-      curl -fsSLk "$dwi_config_url" > "${config_folder}"/dwi_config
-      curl -fsSLk "$dwi_config_sh_url" > "${config_folder}"/dwi_config.sh
-      curl -fsSLk "$dwi_url" > "${config_folder}"/dwi.sh
-    elif [[ $(command -v 'wget') ]]; then
-      wget -q "$dwi_config_url" -O "${config_folder}"/dwi_config
-      wget -q "$dwi_config_sh_url" -O "${config_folder}"/dwi_config.sh
-      wget -q "$dwi_url" -O "${config_folder}"/dwi.sh
-    else
-      echo -e "${RED}${ERROR} This script requires curl or wget.\nProcess aborted${NC}"
-      exit 0
-    fi
-  }
+  if [[ $(command -v 'git') ]]; then
+    git clone https://github.com/tmiland/Dynamic-Wallpaper-Installer.git "$HOME"/.dwi
+  else
+    echo -e "${RED}${ERROR} This script requires git.\nProcess aborted${NC}"
+    exit 0
+  fi
   echo ""
   read -n1 -r -p "Dynamic background installer is ready to be installed, press any key to continue..."
   echo ""
@@ -125,7 +112,30 @@ install() {
 </wallpaper>
 </wallpapers>
 EOF
-exit 0
+  cp -rp "$HOME"/.dwi/assets/debian "$bg_folder"/
+  exit 0
+}
+
+uninstall() {
+  if [ -d "$config_folder" ]
+  then
+    rm -rf "$gbp_folder"/"$wp_name".xml
+    rm -rf "$config_folder"
+    rm "$HOME"/.local/bin/dwi
+    
+    exit 0
+  fi
+}
+
+usage() {
+  # shellcheck disable=SC2046
+  printf "Usage: %s %s [options]\\n" "" $(basename "$0")
+  echo
+  printf "  --config            | -c           run config dialog\\n"
+  printf "  --install           | -i           install\\n"
+  printf "  --uninstall         | -u           uninstall\\n"
+  printf "\\n"
+  echo
 }
 
 ARGS=()
@@ -138,6 +148,10 @@ do
       ;;
     --install | -i)
       install
+      ;;
+    --uninstall | -u)
+      uninstall
+      exit 0
       ;;
     --config | -c)
       . "$cfg_sh_file"
