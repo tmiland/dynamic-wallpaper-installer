@@ -45,11 +45,11 @@ then
   set -o nounset
   set -o xtrace
 fi
-config_folder=$HOME/.dwi
-cfg_sh_file=$config_folder/dwi_config.sh
-cfg_file=$config_folder/dwi_config
 
 install() {
+  config_folder=$HOME/.dwi
+  cfg_sh_file=$config_folder/dwi_config.sh
+  cfg_file=$config_folder/dwi_config
   # Read hidden configuration file with entries separated by " " into array
   if [[ -f $cfg_file ]]
   then
@@ -121,12 +121,14 @@ EOF
 }
 
 uninstall() {
+  config_folder=$HOME/.dwi
+  cfg_sh_file=$config_folder/dwi_config.sh
+  cfg_file=$config_folder/dwi_config
   if [ -d "$config_folder" ]
   then
     rm -rf "$gbp_folder"/"$wp_name".xml
     rm -rf "$config_folder"
     rm "$HOME"/.local/bin/dwi
-    
     exit 0
   fi
 }
