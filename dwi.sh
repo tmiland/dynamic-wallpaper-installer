@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# shellcheck disable=SC2004,SC2317,SC2053
+# shellcheck disable=SC2004,SC2317,SC2053,SC1090
 
 ## Author: Tommy Miland (@tmiland) - Copyright (c) 2024
 
@@ -46,10 +46,15 @@ then
   set -o xtrace
 fi
 
+config_folder=$HOME/.dwi
+cfg_sh_file=$config_folder/dwi_config.sh
+cfg_file=$config_folder/dwi_config
+
+config() {
+  . "$config_folder/$cfg_sh_file"
+}
+
 install() {
-  config_folder=$HOME/.dwi
-  cfg_sh_file=$config_folder/dwi_config.sh
-  cfg_file=$config_folder/dwi_config
   # Read hidden configuration file with entries separated by " " into array
   if [[ -f $cfg_file ]]
   then
@@ -121,9 +126,6 @@ EOF
 }
 
 uninstall() {
-  config_folder=$HOME/.dwi
-  cfg_sh_file=$config_folder/dwi_config.sh
-  cfg_file=$config_folder/dwi_config
   if [ -d "$config_folder" ]
   then
     rm -rf "$gbp_folder"/"$wp_name".xml
@@ -160,7 +162,7 @@ do
       exit 0
       ;;
     --config | -c)
-      . "$cfg_sh_file"
+      config
       exit 0
       ;;
     -*|--*)
