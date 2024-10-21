@@ -5,3 +5,4 @@
 ```shell
 wget -qO- https://github.com/tmiland/Dynamic-Wallpaper-Installer/raw/main/dwi.sh | bash -s -- -i
 ```
+- Comes with default debian dark/light wallpapers
