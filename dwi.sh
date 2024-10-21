@@ -51,7 +51,7 @@ cfg_sh_file=$config_folder/dwi_config.sh
 cfg_file=$config_folder/dwi_config
 
 config() {
-  . "$config_folder/$cfg_sh_file"
+  . "$cfg_sh_file"
 }
 
 install() {
