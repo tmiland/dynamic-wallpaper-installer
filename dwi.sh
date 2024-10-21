@@ -47,7 +47,7 @@ then
 fi
 config_folder=$HOME/.dwi
 cfg_sh_file=$config_folder/dwi_config.sh
-cfg_file=$config_folder/.dwi_config
+cfg_file=$config_folder/dwi_config
 
 install() {
   # Read hidden configuration file with entries separated by " " into array
@@ -99,7 +99,7 @@ install() {
   then
     mkdir -p "$HOME"/.local/bin
   fi
-  ln -sfn "$HOME"/.dwi/dwi.sh "$HOME"/.local/bin/dwi
+  sudo ln -sfn "$HOME"/.dwi/dwi.sh "$HOME"/.local/bin/dwi
   chmod +x "$HOME"/.dwi/dwi.sh
   chmod +x "$HOME"/.dwi/dwi_config.sh
   "$HOME"/.local/bin/dwi -c
