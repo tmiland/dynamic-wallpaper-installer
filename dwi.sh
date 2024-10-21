@@ -95,6 +95,10 @@ install() {
     echo -e "${RED}${ERROR} This script requires git.\nProcess aborted${NC}"
     exit 0
   fi
+  if [[ ! -d "$HOME"/.local/bin ]]
+  then
+    mkdir -p "$HOME"/.local/bin
+  fi
   ln -sfn "$HOME"/.dwi/dwi.sh "$HOME"/.local/bin/dwi
   chmod +x "$HOME"/.dwi/dwi.sh
   chmod +x "$HOME"/.dwi/dwi_config.sh
