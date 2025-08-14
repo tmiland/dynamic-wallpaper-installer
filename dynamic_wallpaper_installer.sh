@@ -97,7 +97,7 @@ install() {
   if [[ $(command -v 'git') ]]; then
     git clone https://github.com/tmiland/dynamic-wallpaper-installer.git "$HOME"/.dynamic_wallpaper_installer >/dev/null 2>&1
   else
-    echo -e "${RED}${ERROR} This script requires git.\nProcess aborted${NC}"
+    echo -e "This script requires git.\nProcess aborted"
     exit 0
   fi
   if [[ ! -d "$HOME"/.local/bin ]]
