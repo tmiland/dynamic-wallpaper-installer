@@ -3,14 +3,14 @@
 
 ## Install
 ```shell
-wget -qO- https://github.com/tmiland/Dynamic-Wallpaper-Installer/raw/main/dwi.sh | bash -s -- -i
+wget -qO- https://github.com/tmiland/dynamic-wallpaper-installer/raw/main/dynamic_wallpaper_installer.sh | bash -s -- -i
 ```
 - Comes with default debian dark/light wallpapers
 
 ## Usage
 
 ```bash
-Usage:  dwi.sh [options]
+Usage:  dynamic_wallpaper_installer.sh [options]
 
   --config            | -c           run config dialog
   --install           | -i           install

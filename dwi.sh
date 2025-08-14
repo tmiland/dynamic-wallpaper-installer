@@ -5,13 +5,13 @@
 
 
 ######################################################################
-####                           dwi.sh                             ####
+####                dynamic wallpaper installer.sh                ####
 ####          Dynamic wallpaper install script for gnome          ####
 ####         Script to install dynamic wallpaper in gnome         ####
 ####                   Maintained by @tmiland                     ####
 ######################################################################
 
-# VERSION='1.0.0' # Must stay on line 14 for updater to fetch the numbers
+VERSION='1.0.0' # Must stay on line 14 for updater to fetch the numbers
 
 #------------------------------------------------------------------------------#
 #
@@ -46,9 +46,9 @@ then
   set -o xtrace
 fi
 
-config_folder=$HOME/.dwi
-cfg_sh_file=$config_folder/dwi_config.sh
-cfg_file=$config_folder/dwi_config
+config_folder=$HOME/.dynamic_wallpaper_installer
+cfg_sh_file=$config_folder/dynamic_wallpaper_installer_config.sh
+cfg_file=$config_folder/dynamic_wallpaper_installer_config
 
 config() {
   . "$cfg_sh_file"
@@ -95,7 +95,7 @@ install() {
   read -n1 -r -p "Dynamic background installer is ready to be installed, press any key to continue..."
   echo ""
   if [[ $(command -v 'git') ]]; then
-    git clone https://github.com/tmiland/Dynamic-Wallpaper-Installer.git "$HOME"/.dwi >/dev/null 2>&1
+    git clone https://github.com/tmiland/dynamic-wallpaper-installer.git "$HOME"/.dynamic_wallpaper_installer >/dev/null 2>&1
   else
     echo -e "${RED}${ERROR} This script requires git.\nProcess aborted${NC}"
     exit 0
@@ -104,11 +104,11 @@ install() {
   then
     mkdir -p "$HOME"/.local/bin
   fi
-  ln -sfn "$HOME"/.dwi/dwi.sh "$HOME"/.local/bin/dwi
-  chown -R "$USER":"$USER" "$HOME"/.local/bin/dwi
-  chmod +x "$HOME"/.dwi/dwi.sh
-  chmod +x "$HOME"/.dwi/dwi_config.sh
-  "$HOME"/.local/bin/dwi -c
+  ln -sfn "$HOME"/.dynamic_wallpaper_installer/dynamic_wallpaper_installer.sh "$HOME"/.local/bin/dynamic_wallpaper_installer
+  chown -R "$USER":"$USER" "$HOME"/.local/bin/dynamic_wallpaper_installer
+  chmod +x "$HOME"/.dynamic_wallpaper_installer/dynamic_wallpaper_installer.sh
+  chmod +x "$HOME"/.dynamic_wallpaper_installer/dynamic_wallpaper_installer_config.sh
+  "$HOME"/.local/bin/dynamic_wallpaper_installer -c
   tee <<EOF > "$gbp_folder"/"$wp_name".xml
 <?xml version="1.0"?>
 <!DOCTYPE wallpapers SYSTEM "gnome-wp-list.dtd">
@@ -121,7 +121,7 @@ install() {
 </wallpaper>
 </wallpapers>
 EOF
-  cp -rp "$HOME"/.dwi/assets/debian/* "$bg_folder"/
+  cp -rp "$HOME"/.dynamic_wallpaper_installer/assets/debian/* "$bg_folder"/
   exit 0
 }
 
@@ -130,7 +130,7 @@ uninstall() {
   then
     rm -rf "$gbp_folder"/"$wp_name".xml
     rm -rf "$config_folder"
-    rm "$HOME"/.local/bin/dwi
+    rm "$HOME"/.local/bin/dynamic_wallpaper_installer
     exit 0
   fi
 }
