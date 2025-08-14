@@ -104,7 +104,7 @@ install() {
   then
     mkdir -p "$HOME"/.local/bin
   fi
-  sudo ln -sfn "$HOME"/.dwi/dwi.sh "$HOME"/.local/bin/dwi
+  ln -sfn "$HOME"/.dwi/dwi.sh "$HOME"/.local/bin/dwi
   chown -R "$USER":"$USER" "$HOME"/.local/bin/dwi
   chmod +x "$HOME"/.dwi/dwi.sh
   chmod +x "$HOME"/.dwi/dwi_config.sh
